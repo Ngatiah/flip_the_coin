@@ -81,6 +81,18 @@
             100% { transform: rotateY(360deg); }
         }
 
+        #shadow.flip {
+            animation: shadowAnimation 0.8s;
+        }
+
+        @keyframes shadowAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.8, 0.6); }
+            100% { transform: scale(1); }
+        }
+
+
+
     </style>
     </head>
     <body>
@@ -97,13 +109,16 @@
      const btn = document.querySelector('button');
      const coin = document.getElementById('coin');
      const resultText = document.getElementById('result');
+     const coinShadow = document.getElementById('shadow')
 
      function flipCoin() {
         // Add flip animation
         coin.classList.add('flip');
+        coinShadow.classList.add('flip');
     
         setTimeout(() => {
             coin.classList.remove('flip');
+            coinShadow.classList.remove('flip');
             const result = Math.random() < 0.5 ? "Heads" : "Tails";
             coin.src = `./resources/${result.toLowerCase()}.svg`;
             resultText.textContent = result;
