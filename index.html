@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Coin Flipper</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            background-color: #404A65;
+            color: #ECEDF0;
+            text-align : center;
+            font-family : 'Kanit',sans-serif;
+
+        }
+
+        button{
+            background-color: #1F6FB0;
+            color: #ECEDF0;
+            outline : none;
+            padding: 2px;
+            width : 150px;
+            height : 40px;
+            border : none;
+            border-radius : 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size : 19px;
+            box-shadow: 0px 4px 0px 0px #23649b;
+        }
+
+        #coin-shadow{
+            display: grid;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+         
+        }
+
+        img{
+            padding : 10px;
+        }
+
+        h1{
+            text-shadow: 
+                    -5px -5px 0px #35383f,
+                    5px -5px 0px #35383f,
+                    -5px 5px 0px #35383f,
+                    5px 5px 0px #35383f;
+            color: #ECEDF0;
+            font-weight: 600;
+            font-size : 64px;
+        }
+
+        h5{
+            font-weight: 600;
+            font-size : 24px;
+        }
+
+        #shadow{
+            margin : 0 25px;
+        }
+
+        #result{
+            font-size : 20px;
+        }
+
+        .flip {
+            animation: flipAnimation 0.8s;
+        }
+
+        @keyframes flipAnimation {
+            0% { transform: rotateY(0); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+    </style>
+    </head>
+    <body>
+            <h1>Flip the coin</h1>
+            <h5>Press the coin or the button to flip coin</h5>
+       <div id="coin-shadow">
+        <img src="./resources/heads.svg" alt="head.svg" id="coin"/>
+        <img alt='shadow.svg' src='./resources/shadow.svg' id="shadow"/>
+       </div>
+    <!--conditionally state which side coin is on-->
+    <p id="result"></p>
+    <button type="button">RANDOM</button>
+    <script>
+     const btn = document.querySelector('button');
+     const coin = document.getElementById('coin');
+     const resultText = document.getElementById('result');
+
+     function flipCoin() {
+        // Add flip animation
+        coin.classList.add('flip');
+    
+        setTimeout(() => {
+            coin.classList.remove('flip');
+            const result = Math.random() < 0.5 ? "Heads" : "Tails";
+            coin.src = `./resources/${result.toLowerCase()}.svg`;
+            resultText.textContent = result;
+        }, 800);
+    }    
+
+    btn.addEventListener('click', flipCoin);
+    coin.addEventListener('click', flipCoin);
+
+
+    </script>
+    </body>
+</html>
